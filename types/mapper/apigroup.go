@@ -14,6 +14,10 @@ func (a *APIGroup) FromInternal(data map[string]interface{}) {
 }
 
 func (a *APIGroup) ToInternal(data map[string]interface{}) error {
+	if a.kind == "PersistentVolumeClaim" {
+		return nil
+	}
+
 	_, ok := data["apiVersion"]
 	if !ok && data != nil {
 		data["apiVersion"] = a.apiVersion
